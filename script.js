@@ -11,14 +11,14 @@ const loader = document.getElementById('loader');
 let apiQuotes = [];  // value can be change
 
 // show loading
-function loading() 
+function showLoadingSpinner() 
 {
     loader.hidden = false;
     quoteContainer.hidden = true;
 } 
 
 // hide loading
-function complete()
+function removeLoadingSpinner()
 {
     loader.hidden = true;
     quoteContainer.hidden = false;
@@ -27,7 +27,7 @@ function complete()
 
 // Show me new Quote
 function newQuote() {
-    loading(); 
+    showLoadingSpinner(); 
     //Pick a Random Quote form an api quotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     // Change the quote
@@ -55,12 +55,12 @@ function newQuote() {
     quoteText.textContent = quote.text;
     
     // set quote and hide loader
-    complete();
+    removeLoadingSpinner();
 }
 
 // Get Quotes from an api
 async function getQuote() {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://type.fit/api/quotes';
     try {
         const response = await fetch(apiUrl);
